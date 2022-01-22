@@ -1,0 +1,65 @@
+<div>
+    <form novalidate [formGroup]="user"> <!--  (ngSubmit)="onSubmit()" -->
+        <div class="form-group">
+            <label for="name">Name</label>
+            <br/>
+            <input
+                class="form-control"
+                type="text"
+                placeholder="User's name"
+                formControlName="name"
+            />
+        </div>
+        <div class="form-group">
+            <label for="name">Surname</label>
+            <br/>
+            <input
+                class="form-control"
+                type="text"
+                placeholder="User's surname"
+                formControlName="surname"
+            />
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <br/>
+            <input
+                class="form-control"
+                type="number"
+                placeholder="User's age"
+                formControlName="age"
+            />
+        </div>
+        <div 
+            class="error"
+            *ngIf="
+                (user.get('age')?.errors?.['required'] && user.get('age')?.touched) ||
+                (user.get('age')?.hasError('min') && user.get('age')?.touched) ||
+                (user.get('age')?.hasError('max') && user.get('age')?.touched)
+            "
+        >
+            Age invalid
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <br/>
+            <input
+                id="email"
+                name="email"
+                required
+                class="form-control"
+                type="email"
+                placeholder="User's email"
+                formControlName="email"
+            />
+        </div>
+        <div class="form-group">
+            <button [disabled]="user.invalid">Enviar formulario</button>
+        </div>
+
+
+        <p>Form value: {{ user.value | json }}</p>
+        <p>Form value: {{ user.status | json }}</p>
+    </form>
+
+</div>
